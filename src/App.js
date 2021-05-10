@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   const [pokeList, setPokeList] = useState([])
@@ -9,18 +10,13 @@ function App() {
     
     
     console.log("clicked")
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=807")
+    
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=807")
     .then(response => {
       console.log("**********")
       console.log(response)
       console.log("**********")
-      return response.json()
-    })
-    .then(response => {
-      console.log("!!!!!!!!!")
-      console.log(response)
-      console.log("!!!!!!!!!")
-      setPokeList(response.results)
+      setPokeList(response.data.results)
     })
     .catch(err =>{
       console.log(err)
